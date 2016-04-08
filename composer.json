@@ -1,0 +1,18 @@
+{
+    "name": "murat-cileli/php-reportz",
+    "description": "PHP Report generation tool.",
+    "authors": [
+        {
+            "name": "Murat Cileli",
+            "email": "murat.cileli@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "PHPReportz": "src/"
+        }
+    }
+}
