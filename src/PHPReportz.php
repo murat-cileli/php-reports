@@ -186,6 +186,12 @@ class PHPReportz
         curl_setopt($ch, CURLOPT_POSTFIELDS, "json={$json}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_code != 200) {
+            throw new \Exception("Can not make API request. HTTP status code: {$http_code}");
+        }
 
         echo $response;
     }
