@@ -192,7 +192,5 @@ class PHPReportz
         if ($http_code != 200) {
             throw new \Exception("Can not make API request. HTTP status code: {$http_code}");
         }
-
-        echo $response;
     }
 }
