@@ -8,7 +8,6 @@ namespace PHPReportz;
  */
 class PHPReportz
 {
-
     /**
      * Options to output file type selection
      */
@@ -138,6 +137,14 @@ class PHPReportz
             'action' => ($action != self::ACTION_FORCE_DOWNLOAD && $action != self::ACTION_GET_DOWNLOAD_URL) ? self::ACTION_FORCE_DOWNLOAD : $action
         );
 
-        echo json_encode($this->json);
+        $this->json = json_encode($this->json);
+
+        $ch = curl_init('http://127.0.0.1:8000/api');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "json={$this->json}");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+
+        echo $response;
     }
 }
