@@ -168,7 +168,7 @@ class PHPReportz
      * @param int $action
      * @throws \Exception
      */
-    public function generateReport($action = self::ACTION_FORCE_DOWNLOAD)
+    public function generateReport()
     {
         $post_fields = array(
             'api_key'          => $this->getApiKey(),
