@@ -6,7 +6,7 @@ namespace PHPReportz;
  * Class PHPReportz
  * @package PHPReportz
  */
-class PHPReportz implements \JsonSerializable
+class PHPReportz
 {
 
     /**
@@ -18,12 +18,13 @@ class PHPReportz implements \JsonSerializable
     /**
      * Get download URL as JSON or direct download report
      */
-    const ACTION_GET_DOWNLOAD_URL = 3;
-    const ACTION_FORCE_DOWNLOAD = 4;
+    const ACTION_GET_DOWNLOAD_URL = 1;
+    const ACTION_FORCE_DOWNLOAD = 2;
 
     protected $api_key;
     protected $template_id;
     protected $parameters;
+    protected $output_file_type;
     private $json;
 
     /**
@@ -44,7 +45,7 @@ class PHPReportz implements \JsonSerializable
      */
     private function getApiKey()
     {
-        if (empty($api_key)) {
+        if (empty($this->api_key)) {
             throw new \Exception("Invalid API key");
         }
 
@@ -68,7 +69,7 @@ class PHPReportz implements \JsonSerializable
      */
     private function getTemplateİd()
     {
-        if (empty($template_id)) {
+        if (empty($this->template_id)) {
             throw new \Exception("Invalid Template ID");
         }
 
@@ -92,7 +93,7 @@ class PHPReportz implements \JsonSerializable
      */
     private function getParameters()
     {
-        if (empty($parameters)) {
+        if (empty($this->parameters)) {
             throw new \Exception("Parameters must be an array");
         }
 
@@ -100,14 +101,38 @@ class PHPReportz implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @param mixed $template_id
      */
-    public function jsonSerialize()
+    public function setOutputFileType($type = self::OUTPUT_PDF)
     {
-        $this->json = [
+        if ($type != self::OUTPUT_PDF && $type != self::OUTPUT_DOCX) {
+            throw new \Exception("Invalid output file type specified");
+        }
+
+        $this->output_file_type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOutputFileType()
+    {
+        if ($this->output_file_type != self::OUTPUT_PDF && $this->output_file_type != self::OUTPUT_DOCX) {
+            $this->output_file_type = self::OUTPUT_PDF;
+        }
+
+        return $this->output_file_type;
+    }
+
+    public function generateReport($action = self::ACTION_FORCE_DOWNLOAD)
+    {
+        $this->json = array(
             'api_key'     => $this->getApiKey(),
             'template_id' => $this->getTemplateİd(),
-            'parameters'  => $this->getParameters()
-        ];
+            'parameters'  => $this->getParameters(),
+            'output_file_type' => $this->getOutputFileType()
+        );
+
+        echo json_encode($this->json);
     }
 }

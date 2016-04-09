@@ -15,4 +15,4 @@ $pr->setParameters(
         'total' => '0.55'
     ));
 
-echo json_encode($pr);
+$pr->generateReport();
