@@ -67,7 +67,7 @@ class PHPReportz
     /**
      * @return mixed
      */
-    private function getTemplateİd()
+    private function getTemplateId()
     {
         if (empty($this->template_id)) {
             throw new \Exception("Invalid Template ID");
@@ -172,7 +172,7 @@ class PHPReportz
     {
         $post_fields = array(
             'api_key'          => $this->getApiKey(),
-            'template_id'      => $this->getTemplateİd(),
+            'template_id'      => $this->getTemplateId(),
             'parameters'       => $this->getParameters(),
             'output_file_name' => $this->getOutputFileName(),
             'output_file_type' => $this->getOutputFileType(),
