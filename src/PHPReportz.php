@@ -10,13 +10,13 @@ class PHPReportz
 {
 
     /**
-     * Output file type selection
+     * Options to output file type selection
      */
     const OUTPUT_DOCX = 1;
     const OUTPUT_PDF = 2;
 
     /**
-     * Get download URL as JSON or direct download report
+     * Options to get download URL as JSON or direct download generated report
      */
     const ACTION_GET_DOWNLOAD_URL = 1;
     const ACTION_FORCE_DOWNLOAD = 2;
@@ -115,7 +115,7 @@ class PHPReportz
     /**
      * @return mixed
      */
-    public function getOutputFileType()
+    private function getOutputFileType()
     {
         if ($this->output_file_type != self::OUTPUT_PDF && $this->output_file_type != self::OUTPUT_DOCX) {
             $this->output_file_type = self::OUTPUT_PDF;
@@ -124,13 +124,18 @@ class PHPReportz
         return $this->output_file_type;
     }
 
+    /**
+     * @param int $action
+     * @throws \Exception
+     */
     public function generateReport($action = self::ACTION_FORCE_DOWNLOAD)
     {
         $this->json = array(
             'api_key'     => $this->getApiKey(),
             'template_id' => $this->getTemplateİd(),
             'parameters'  => $this->getParameters(),
-            'output_file_type' => $this->getOutputFileType()
+            'output_file_type' => $this->getOutputFileType(),
+            'action' => ($action != self::ACTION_FORCE_DOWNLOAD && $action != self::ACTION_GET_DOWNLOAD_URL) ? self::ACTION_FORCE_DOWNLOAD : $action
         );
 
         echo json_encode($this->json);
