@@ -23,8 +23,9 @@ class PHPReportz
     protected $api_key;
     protected $template_id;
     protected $parameters;
+    protected $output_file_name;
     protected $output_file_type;
-    private $json;
+    protected $output_action;
 
     /**
      * PHPReportz constructor.
@@ -100,6 +101,22 @@ class PHPReportz
     }
 
     /**
+     * @return mixed
+     */
+    public function getOutputFileName()
+    {
+        return $this->output_file_name;
+    }
+
+    /**
+     * @param mixed $output_file_name
+     */
+    public function setOutputFileName($output_file_name)
+    {
+        $this->output_file_name = $output_file_name;
+    }
+
+    /**
      * @param mixed $template_id
      */
     public function setOutputFileType($type = self::OUTPUT_PDF)
@@ -124,24 +141,49 @@ class PHPReportz
     }
 
     /**
+     * @return mixed
+     */
+    public function getOutputAction()
+    {
+        if ($this->output_action != self::ACTION_FORCE_DOWNLOAD && $this->output_action != self::ACTION_GET_DOWNLOAD_URL) {
+            $this->output_action = self::ACTION_FORCE_DOWNLOAD;
+        }
+
+        return $this->output_action;
+    }
+
+    /**
+     * @param mixed $output_action
+     */
+    public function setOutputAction($output_action = self::ACTION_FORCE_DOWNLOAD)
+    {
+        if ($output_action != self::ACTION_FORCE_DOWNLOAD && $output_action != self::ACTION_GET_DOWNLOAD_URL) {
+            $output_action = self::ACTION_FORCE_DOWNLOAD;
+        }
+
+        $this->output_action = $output_action;
+    }
+
+    /**
      * @param int $action
      * @throws \Exception
      */
     public function generateReport($action = self::ACTION_FORCE_DOWNLOAD)
     {
-        $this->json = array(
-            'api_key'     => $this->getApiKey(),
-            'template_id' => $this->getTemplateİd(),
-            'parameters'  => $this->getParameters(),
+        $post_fields = array(
+            'api_key'          => $this->getApiKey(),
+            'template_id'      => $this->getTemplateİd(),
+            'parameters'       => $this->getParameters(),
+            'output_file_name' => $this->getOutputFileName(),
             'output_file_type' => $this->getOutputFileType(),
-            'action' => ($action != self::ACTION_FORCE_DOWNLOAD && $action != self::ACTION_GET_DOWNLOAD_URL) ? self::ACTION_FORCE_DOWNLOAD : $action
+            'output_action'    => $this->getOutputAction()
         );
 
-        $this->json = json_encode($this->json);
+        $json = json_encode($post_fields);
 
         $ch = curl_init('http://127.0.0.1:8000/api');
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "json={$this->json}");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "json={$json}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
 
