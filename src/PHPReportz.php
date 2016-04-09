@@ -22,7 +22,7 @@ class PHPReportz
 
     protected $api_key;
     protected $template_id;
-    protected $parameters;
+    protected $template_variables;
     protected $output_file_name;
     protected $output_file_type;
     protected $output_action;
@@ -57,7 +57,7 @@ class PHPReportz
      */
     public function setTemplateId($template_id)
     {
-        if (empty($template_id) || !is_int($template_id)) {
+        if (empty($template_id) || !is_numeric($template_id)) {
             throw new \Exception("Invalid Template ID");
         }
 
@@ -77,27 +77,27 @@ class PHPReportz
     }
 
     /**
-     * @param mixed $parameters
+     * @param mixed $template_variables
      */
-    public function setParameters($parameters)
+    public function setTemplateVariables($template_variables)
     {
-        if (empty($parameters) || !is_array($parameters)) {
+        if (empty($template_variables) || !is_array($template_variables)) {
             throw new \Exception("Parameters must be an array");
         }
 
-        $this->parameters = $parameters;
+        $this->template_variables = $template_variables;
     }
 
     /**
      * @return mixed
      */
-    private function getParameters()
+    private function getTemplateVariables()
     {
-        if (empty($this->parameters)) {
-            throw new \Exception("Parameters must be an array");
+        if (empty($this->template_variables)) {
+            throw new \Exception("Template variables must be an array");
         }
 
-        return $this->parameters;
+        return $this->template_variables;
     }
 
     /**
@@ -171,12 +171,12 @@ class PHPReportz
     public function generateReport()
     {
         $post_fields = array(
-            'api_key'          => $this->getApiKey(),
-            'template_id'      => $this->getTemplateId(),
-            'parameters'       => $this->getParameters(),
-            'output_file_name' => $this->getOutputFileName(),
-            'output_file_type' => $this->getOutputFileType(),
-            'output_action'    => $this->getOutputAction()
+            'api_key'            => $this->getApiKey(),
+            'template_id'        => $this->getTemplateId(),
+            'template_variables' => $this->getTemplateVariables(),
+            'output_file_name'   => $this->getOutputFileName(),
+            'output_file_type'   => $this->getOutputFileType(),
+            'output_action'      => $this->getOutputAction()
         );
 
         $json = json_encode($post_fields);

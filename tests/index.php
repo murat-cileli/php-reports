@@ -7,7 +7,7 @@ use PHPReportz\PHPReportz;
 
 $pr = new PHPReportz('123456789012345678901234');
 $pr->setTemplateId(1);
-$pr->setParameters(
+$pr->setTemplateVariables(
     array(
         'company_name' => 'Apple Inc.',
         'address' => 'Istanbul / Turkey',
