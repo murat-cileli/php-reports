@@ -1,4 +1,8 @@
 <?php
+/*
+ * This file is part of the "PHP Reportz" package.
+ * Author: Murat Çileli <murat.cileli@gmail.com>
+ */
 
 namespace PHPReportz;
 
