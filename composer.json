@@ -1,5 +1,5 @@
 {
-    "name": "murat-cileli/php-reportz",
+    "name": "murat-cileli/php-reports",
     "description": "PHP Report generation tool.",
     "authors": [
         {
@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-0": {
-            "PHPReportz": "src/"
+            "PHPReports": "src/"
         }
     }
 }
