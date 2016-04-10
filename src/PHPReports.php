@@ -1,16 +1,16 @@
 <?php
 /*
- * This file is part of the "PHP Reportz" package.
+ * This file is part of the "PHP-Reports" package.
  * Author: Murat Çileli <murat.cileli@gmail.com>
  */
 
-namespace PHPReportz;
+namespace PHPReports;
 
 /**
- * Class PHPReportz
- * @package PHPReportz
+ * Class PHPReports
+ * @package PHPReports
  */
-class PHPReportz
+class PHPReports
 {
     /**
      * Options to output file type selection
@@ -32,7 +32,7 @@ class PHPReportz
     protected $output_action;
 
     /**
-     * PHPReportz constructor.
+     * PHPReports constructor.
      * @param $api_key
      */
     public function __construct($api_key)
