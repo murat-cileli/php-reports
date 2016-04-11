@@ -1,2 +1,2 @@
-# php-reportz
+# PHP Reports
 PHP Report generation tool.
