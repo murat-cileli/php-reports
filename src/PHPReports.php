@@ -2,6 +2,7 @@
 /*
  * This file is part of the "PHP-Reports" package.
  * Author: Murat Çileli <murat.cileli@gmail.com>
+ * Web: https://www.php-reports.com
  */
 
 namespace PHPReports;
@@ -32,7 +33,7 @@ class PHPReports
     protected $output_action;
 
     /**
-     * PHPReports constructor.
+     * Get free API Key from https://www.php-reports.com
      * @param $api_key
      */
     public function __construct($api_key)
