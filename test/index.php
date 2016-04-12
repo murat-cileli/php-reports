@@ -8,7 +8,7 @@ use PHPReports\PHPReports;
 $pr = new PHPReports('f9nb3k8bzfumne6g6yu6fu4d');
 $pr->setTemplateId(2);
 $pr->setOutputFileType(PHPReports::OUTPUT_PDF);
-$pr->setOutputAction(PHPReports::ACTION_GET_DOWNLOAD_URL);
+$pr->setOutputAction(PHPReports::ACTION_FORCE_DOWNLOAD);
 $pr->setOutputFileName('My_Generated_Report.docx');
 $pr->setTemplateVariables(
     array(
