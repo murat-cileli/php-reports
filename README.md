@@ -37,7 +37,8 @@ $pr->setTemplateVariables(
     array(
         'client_name' => 'Armut Inc.',
         'email_address'      => 'murat.cileli@gmail.com',
-        'client_name'  => 'Murat Çileli',
         'products'     => array('Computer', 'Smart Phone', 'Book')
     ));
 ```
+
+You can pass a single value or an array to template variable. Templates variables that have multiple values, will be seperated by linebreaks in your generated report.
