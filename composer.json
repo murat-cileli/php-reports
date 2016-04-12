@@ -1,6 +1,6 @@
 {
     "name": "murat-cileli/php-reports",
-    "description": "PHP Report generation tool.",
+    "description": "PHP-Reports is a report engine which helps in generating well formatted PDF reports from Word / DOCX templates in PHP and other languages as well.",
     "authors": [
         {
             "name": "Murat Cileli",
