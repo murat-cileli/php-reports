@@ -25,7 +25,7 @@ Save and upload your teamplte at "Template Manager" section in https://www.php-r
 Download https://github.com/murat-cileli/php-reports or install via Composer.
 
 #6. Generating Reports
-You can pass values to template variables and generate your report in few line a code. 
+You can pass values to template variables and generate your report using only a few lines of code.
 
 ```php
 $pr = new PHPReports('f9nb3k8bzfumne6g6yu6fu4d');
