@@ -23,6 +23,9 @@ Save and upload your teamplte at "Template Manager" section in https://www.php-r
 
 #5. Include PHPReports.php Class to Your Project
 Download https://github.com/murat-cileli/php-reports or install via Composer.
+```php
+composer require murat-cileli/php-reports
+```
 
 #6. Generating Reports
 You can pass values to template variables and generate your report using only a few lines of code.
