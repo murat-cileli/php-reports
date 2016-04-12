@@ -198,8 +198,13 @@ class PHPReports
 
         if ($http_code != 200 && $http_code != 302) {
             throw new \Exception("Can not make API request. HTTP status code: {$http_code}");
-        } else {
+        }
+
+        if ($this->getOutputAction() == self::ACTION_GET_DOWNLOAD_URL) {
             echo $response;
+        } else {
+            $response = json_decode($response);
+            header("Location: $response->report_url");
         }
     }
 }
