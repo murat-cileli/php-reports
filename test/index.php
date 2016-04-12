@@ -5,8 +5,11 @@ require_once '../src/PHPReports.php';
 
 use PHPReports\PHPReports;
 
-$pr = new PHPReports('123456789012345678901234');
-$pr->setTemplateId(1);
+$pr = new PHPReports('f9nb3k8bzfumne6g6yu6fu4d');
+$pr->setTemplateId(2);
+$pr->setOutputFileType(PHPReports::OUTPUT_DOCX);
+$pr->setOutputAction(PHPReports::ACTION_GET_DOWNLOAD_URL);
+$pr->setOutputFileName('My_Generated_Report.docx');
 $pr->setTemplateVariables(
     array(
         'company_name' => 'Apple Inc.',
@@ -18,5 +21,4 @@ $pr->setTemplateVariables(
         'totals'       => array('5160', '998', '30'),
         'total'        => '6.188',
     ));
-
 $pr->generateReport();
