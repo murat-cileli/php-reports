@@ -186,8 +186,7 @@ class PHPReports
 
         $json = json_encode($post_fields);
 
-        //$ch = curl_init('https://www.php-reports.com/api/report/generate');
-        $ch = curl_init('http://127.0.0.1:8000/api/report/generate');
+        $ch = curl_init('https://www.php-reports.com/api/report/generate');
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "json={$json}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
