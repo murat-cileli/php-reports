@@ -186,18 +186,20 @@ class PHPReports
 
         $json = json_encode($post_fields);
 
-        $ch = curl_init('https://www.php-reports.com/api/report/generate');
+        //$ch = curl_init('https://www.php-reports.com/api/report/generate');
+        $ch = curl_init('http://127.0.0.1:8000/api/report/generate');
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "json={$json}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         $response = curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        if ($http_code != 200) {
+        if ($http_code != 200 && $http_code != 302) {
             throw new \Exception("Can not make API request. HTTP status code: {$http_code}");
+        } else {
+            echo $response;
         }
-
-        echo $response;
     }
 }
